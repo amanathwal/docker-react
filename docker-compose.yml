@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web:  # the name of the container
+    build:
+      context: .
+      dockerfile: Dockerfile.dev # name of the docker build file 
+    ports:
+      - "3001:3000"
+    volumes: 
+      - /app/node_modules
+      - .:/app   #bookmark this folder in the docker container
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev # name of the docker build file 
+    volumes: 
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"] 
